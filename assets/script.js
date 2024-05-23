@@ -43,8 +43,8 @@ movieList.push(aliceInTheWonderland);
 const movieCardArea = $('#movieCardArea');
 function displayMovieCards(movie) {
     
-    const movieCardEl = $('<div>').addClass('card col-2 mx-2 bg-dark text-white movieCard').attr('style', 'min-height: 125px');
-    const movieCardBody = $('<div>').addClass('movieCard card-body');
+    const movieCardEl = $('<div>').addClass('movieCard card-body col-2 mx-2 bg-dark text-white align-content-end').attr('style', 'min-height: 125px');
+    const movieCardBody = $('<div>').addClass('movieCard card-text');
     const movieCardTitle = $('<h5>').addClass('movieCard card-title user-select-none').text(movie.title);
 
     movieCardEl.attr('id', movie.title);
@@ -64,14 +64,8 @@ function createMovieCards() {
 createMovieCards();
 
 $(document).click(function(event){
-    var clickedMovie = '';
-    if(event.target.getAttribute('class')) {
-        clickedMovie = event.target.getAttribute('class').split(/\s+/);
-    } else {
-        return;
-    }
-
-    if(clickedMovie[0] === 'movieCard') {
+    
+    if(event.target.getAttribute('class').split(/\s+/)[0] === 'movieCard') {
         const movieDetailArea = $('#movieCardDetails');
         movieDetailArea.empty();
         for (let movies of movieList) {
@@ -80,10 +74,6 @@ $(document).click(function(event){
                 const movieDescription = $('<p>').text(movies.description);
                 movieDetailArea.append(movieTitle, movieDescription);
             }
-            
         }
-       
     }
-
-    
 })
