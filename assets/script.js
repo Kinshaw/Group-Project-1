@@ -63,17 +63,36 @@ function createMovieCards() {
 
 createMovieCards();
 
-$(document).click(function(event){
-    
-    if(event.target.getAttribute('class').split(/\s+/)[0] === 'movieCard') {
-        const movieDetailArea = $('#movieCardDetails');
-        movieDetailArea.empty();
-        for (let movies of movieList) {
-            if(movies.title === event.target.id) {             
-                const movieTitle = $('<h2>').text(movies.title);
-                const movieDescription = $('<p>').text(movies.description);
-                movieDetailArea.append(movieTitle, movieDescription);
+
+$('.movieCard').click(function(event){
+    const movieDetailArea = $('#movieCardDetails');
+    movieDetailArea.empty();
+    for (let movies of movieList) {
+        if(movies.title === event.target.id) {             
+            const movieTitle = $('<h2>').text(movies.title).addClass('my-2');
+            const movieDescription = $('<p>').text(movies.description);
+            movieDetailArea.append(movieTitle, movieDescription);
+        }
+    }    
+})
+
+const inputList = $('.form-check-input');
+const searchFilters = [];
+
+inputList.click(function(event){
+    for(let input of inputList) {
+        if (input.id === event.target.id)
+            if(input.checked){
+                searchFilters.push(input.id);
+            } else {
+                for (let filter of searchFilters){
+                    if(filter === input.id) {
+                        searchFilters.splice(searchFilters.indexOf(filter), 1);
+                    }
+                }
+                
             }
         }
-    }
+    console.log(searchFilters);
 })
+
