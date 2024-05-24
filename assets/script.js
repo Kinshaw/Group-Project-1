@@ -48,21 +48,21 @@ function displayMovieCards(movie) {
     const movieCardTitle = $('<h5>').addClass('movieCard card-title user-select-none').text(movie.title);
 
     movieCardEl.attr('id', movie.title);
-    movieCardBody.attr('id',  movie.title);
-    movieCardTitle.attr('id',  movie.title);
+    movieCardBody.attr('id', movie.title);
+    movieCardTitle.attr('id', movie.title);
 
     movieCardEl.append(movieCardBody, movieCardTitle);
     movieCardArea.append(movieCardEl);
 }
 
 function createMovieCards() {
+    movieCardArea.empty();
     for (let movie of movieList) {      
         displayMovieCards(movie);
     }
 }
 
 createMovieCards();
-
 
 $('.movieCard').click(function(event){
     const movieDetailArea = $('#movieCardDetails');
@@ -128,3 +128,27 @@ $( function() {
     });
   } );
 
+  //randomize 5 movie display based on seach filter
+  $('#btn-randomize').click(function(event){
+    
+    shuffle(movieList);
+    
+    createMovieCards();
+  })
+
+  //Fisher yates shuffle
+  function shuffle(array) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  }

@@ -6,6 +6,10 @@
     color: #fec89a;
 }
 
+#btn-randomize{
+    background-color: #8ECAE6;
+}
+
 .navbar-brand:hover {
     color: #fec89a;
     transform: scale(90%);
