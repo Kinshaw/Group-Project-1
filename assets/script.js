@@ -76,6 +76,7 @@ $('.movieCard').click(function(event){
     }    
 })
 
+//Search filters stored in array
 const inputList = $('.form-check-input');
 const searchFilters = [];
 
@@ -95,4 +96,35 @@ inputList.click(function(event){
         }
     console.log(searchFilters);
 })
+
+//autocomplete for search which will use a fetch function to get all the movies names
+$( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
 

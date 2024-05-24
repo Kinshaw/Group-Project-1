@@ -22,3 +22,8 @@
 .card-title {
     pointer-events: none;
 }
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
