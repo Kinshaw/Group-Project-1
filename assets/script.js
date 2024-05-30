@@ -43,19 +43,20 @@ movieList.push(aliceInTheWonderland);
 const movieCardArea = $('#movieCardArea');
 function displayMovieCards(movie) {
     
-    const movieCardEl = $('<div>').addClass('card col-2 mx-2 bg-dark text-white movieCard').attr('style', 'min-height: 125px');
-    const movieCardBody = $('<div>').addClass('movieCard card-body');
+    const movieCardEl = $('<div>').addClass('movieCard card-body col-2 mx-2 bg-dark text-white align-content-end').attr('style', 'min-height: 125px');
+    const movieCardBody = $('<div>').addClass('movieCard card-text');
     const movieCardTitle = $('<h5>').addClass('movieCard card-title user-select-none').text(movie.title);
 
     movieCardEl.attr('id', movie.title);
-    movieCardBody.attr('id',  movie.title);
-    movieCardTitle.attr('id',  movie.title);
+    movieCardBody.attr('id', movie.title);
+    movieCardTitle.attr('id', movie.title);
 
     movieCardEl.append(movieCardBody, movieCardTitle);
     movieCardArea.append(movieCardEl);
 }
 
 function createMovieCards() {
+    movieCardArea.empty();
     for (let movie of movieList) {      
         displayMovieCards(movie);
     }
@@ -63,27 +64,91 @@ function createMovieCards() {
 
 createMovieCards();
 
-$(document).click(function(event){
-    var clickedMovie = '';
-    if(event.target.getAttribute('class')) {
-        clickedMovie = event.target.getAttribute('class').split(/\s+/);
-    } else {
-        return;
-    }
-
-    if(clickedMovie[0] === 'movieCard') {
-        const movieDetailArea = $('#movieCardDetails');
-        movieDetailArea.empty();
-        for (let movies of movieList) {
-            if(movies.title === event.target.id) {             
-                const movieTitle = $('<h2>').text(movies.title);
-                const movieDescription = $('<p>').text(movies.description);
-                movieDetailArea.append(movieTitle, movieDescription);
-            }
-            
+$('.movieCard').click(function(event){
+    const movieDetailArea = $('#movieCardDetails');
+    movieDetailArea.empty();
+    for (let movies of movieList) {
+        if(movies.title === event.target.id) {             
+            const movieTitle = $('<h2>').text(movies.title).addClass('my-2');
+            const movieDescription = $('<p>').text(movies.description);
+            movieDetailArea.append(movieTitle, movieDescription);
         }
-       
-    }
-
-    
+    }    
 })
+
+//Search filters stored in array
+const inputList = $('.form-check-input');
+const searchFilters = [];
+
+inputList.click(function(event){
+    for(let input of inputList) {
+        if (input.id === event.target.id)
+            if(input.checked){
+                searchFilters.push(input.id);
+            } else {
+                for (let filter of searchFilters){
+                    if(filter === input.id) {
+                        searchFilters.splice(searchFilters.indexOf(filter), 1);
+                    }
+                }
+                
+            }
+        }
+    console.log(searchFilters);
+})
+
+//autocomplete for search which will use a fetch function to get all the movies names
+$( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+
+  //randomize 5 movie display based on seach filter
+  $('#btn-randomize').click(function(event){
+    
+    shuffle(movieList);
+    
+    createMovieCards();
+  })
+
+  //Fisher yates shuffle
+  function shuffle(array) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  }

@@ -6,6 +6,10 @@
     color: #fec89a;
 }
 
+#btn-randomize{
+    background-color: #8ECAE6;
+}
+
 .navbar-brand:hover {
     color: #fec89a;
     transform: scale(90%);
@@ -15,6 +19,15 @@
     background-color: #e76f51;
 }
 
-.movieCard:hover {
+.card-body:hover {
     transform: scale(90%);
+}
+
+.card-title {
+    pointer-events: none;
+}
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
