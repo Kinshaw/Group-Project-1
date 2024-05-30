@@ -43,9 +43,8 @@
 const movieCardArea = $('#movieCardArea');
 const inputList = $('.form-check-input');
 const searchFilters = [];
-const movies = JSON.parse(localStorage.getItem('top100'));
 const movieTitles = [];
-
+const movies = JSON.parse(localStorage.getItem('top100'));
 function displayMovieCards(movie) {
     
     const movieCardEl = $('<div>').addClass('movieCard row col-lg-2 col-md-3 col-sm-4 m-2 align-content-start');
