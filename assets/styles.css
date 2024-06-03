@@ -26,6 +26,17 @@
 .card-title {
     pointer-events: none;
 }
+.movieCard {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.thumbnail {
+    height: 50%;
+    width: 50%;
+}
+
 .ui-autocomplete {
     max-height: 100px;
     overflow-y: hidden;
